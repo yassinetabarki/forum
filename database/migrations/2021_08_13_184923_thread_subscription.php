@@ -31,6 +31,8 @@ class ThreadSubscription extends Migration
             ->on('threads')
 
             ->delete('cascade');
+
+            $table->unique(['user_id','thread_id']);
         });
     }
 

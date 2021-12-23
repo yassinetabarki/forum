@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Notifications\ThreadWasUpdated;
 use Illuminate\Database\Eloquent\Model;
 use function foo\func;
 
@@ -12,6 +13,8 @@ class Thread extends Model
     protected $guarded = [];
     protected $with=['creator','channel'];// to always include the creator in the query and you can't disable it
 
+    protected $appends = ['isSubscribedTo'];
+    
     protected static function boot()
     {
         parent::boot();
@@ -48,7 +51,30 @@ class Thread extends Model
 
     public function addReply($reply)
     {
-         return $this->replies()->create($reply);
+         $reply = $this->replies()->create($reply);
+
+// prepare notifications for all subscribers
+         //collection approch
+             $this->subscriptions
+            ->where('user_id','!=',$reply->user_id)
+            ->each->notify($reply); //higher order 
+
+        //  ->each(function ($sub) use($reply){
+
+        //     $sub->user->notify(new ThreadWasUpdated($this,$reply));
+
+        //  });
+        
+        // foreach ($this->subscriptions as $subscription) {
+            
+        //     if($subscription->user_id != $reply->user_id){
+        //         $subscription->user->notify(new ThreadWasUpdated($this,$reply));
+        //     }
+            
+        // }
+
+         return $reply;
+
     }
 
 
@@ -64,24 +90,30 @@ class Thread extends Model
 
     public function subscribe($userId = null)
     {
-        $this->subscription()->create([
+        $this->subscriptions()->create([
             'user_id'=> $userId ?: auth()->id()
         ]);
+
+        return $this;
     }
     
 
-    
     public function unsubscribe($userId = null)
     {
-        $this->subscription()
+        $this->subscriptions()
         ->where('user_id', $userId ?: auth()->id())
         ->delete();
     }
 
-    public function subscription()
-
+    public function subscriptions()
     {
         return $this->hasMany(ThreadSubscription::class);
+    }
+
+    public function getIsSubscribedToAttribute(){
+        return $this->subscriptions()
+        ->where('user_id',auth()->id())
+        ->exists();
     }
     
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Unit;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -66,4 +66,39 @@ class ThreadTest extends TestCase
         $thread=create('App\Thread');
         $this->assertEquals("/threads/{$thread->channel->slug}/".$thread->id,$thread->path());
     }
+    /** @test */
+    public function a_thread_can_be_subscribed_to()
+    {
+        $thread=create('App\Thread');
+
+        $this->signIn();
+
+        $thread->subscribe();
+
+        $this->assertEquals(1,$thread->subscriptions()->where('user_id',auth()->id())->count());
+    }
+
+        /** @test */
+        public function a_thread_can_be_unsubscribed_to ()
+        {
+            $thread=create('App\Thread');
+            $thread->subscribe($userId=1);
+            
+            $thread->unsubscribe($userId);
+    
+            $this->assertCount(0,$thread->subscriptions);
+        }
+
+        /** @test */
+        public function check_if_th_authenticated_user_is_subscribed ()
+        {   
+                $thread=create('App\Thread');
+                
+                $this->signIn();
+
+                $thread->subscribe();
+
+                $this->assertTrue($thread->isSubscribedTo);
+        }
+
 }

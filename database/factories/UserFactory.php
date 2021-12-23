@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Str;
 use Faker\Generator as Faker;
+use Ramsey\Uuid\Uuid;
+use Illuminate\Notifications\DatabaseNotification;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,3 +61,6 @@ $factory->define(App\Channel::class,function (Faker $faker){
         'slug'=> $name
     ];
 });
+
+
+

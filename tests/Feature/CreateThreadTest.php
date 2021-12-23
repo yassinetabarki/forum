@@ -97,36 +97,12 @@ class CreateThreadTest extends TestCase
         $this->assertEquals(0,Activity::count());
         
     }
-    
+
     public function publishThread($overrides = [])
     {
         $this->withExceptionHandling()->signIn();
         $thread=make('App\Thread',$overrides);
         return $this->post('/threads',$thread->toArray());
-    }
-/** @test */
-    public function a_thread_can_be_subscribed_to(){
-        // Given we have a thread 
-
-        $thread=create('App\Thread');
-
-        //And an authenticated user
-        // $this->signIn();
-        //When the user subscribes to the thread
-        $thread->subscribe($userId=1);
-        //The we should be able to fresh all threads that the user has subscribed to.
-        $this->assertEquals(1,$thread->subscription()->where('user_id',$userId)->count());
-
-    }
-
-    /** @test */
-    public function a_thread_can_be_unsubscribed_to ()
-    {
-        $thread=create('App\Thread');
-
-        $thread->unsubscribe($userId=1);
-
-        $this->assertCount(0,$thread->subscription);
     }
     
 }

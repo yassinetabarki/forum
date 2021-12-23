@@ -42,7 +42,7 @@ export default {
            .then(({data}) => {
                this.body='';
 
-               flash("Your reply has been created.");
+               flash("Your reply has been created.sqddd");
 
                this.$emit('created', data);
            });
