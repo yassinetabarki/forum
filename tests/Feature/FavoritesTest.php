@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\User;
+use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -26,6 +28,16 @@ class FavoritesTest extends TestCase
         $this->post('/replies/'.$replie->id.'/favorites');
         $this->assertCount(1,$replie->favorites);
     }
+    /** @test*/
+    public function authenticated_user_may_unfavorites_replies()
+    {
+        $this->signIn();
+        $reply=create('App\Reply');
+        $this->post('/replies/'.$reply->id.'/favorites');
+        $this->delete('/replies/'.$reply->id.'/favorites');
+        $this->assertCount(0,$reply->favorites);
+
+    }
 
     /** @test*/
     public function authenticated_user_may_only_favorites_reply_once()
@@ -39,4 +51,15 @@ class FavoritesTest extends TestCase
         $this->post('/replies/'.$replie->id.'/favorites');
         $this->assertCount(1,$replie->favorites);
     }
+    /** @test*/
+    public function authenticated_user_cannot_delele_there_thread_by_repling()
+    {
+        $this->signIn();
+        $reply=create('App\Reply',['user_id'=>auth()->id()]);
+        $this->post('/replies/'.$reply->id.'/favorites');
+        $this->assertCount(1,$reply->favorites);
+        $this->delete('/replies/'.$reply->id.'/favorites');
+        $this->assertDatabaseHas('replies',['id'=>$reply->id]);
+    }
+
 }

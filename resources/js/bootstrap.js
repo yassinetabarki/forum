@@ -7,6 +7,7 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  */
 
+
 try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
@@ -22,7 +23,11 @@ try {
 
 window.axios = require('axios');
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+window.axios.defaults.headers.common={
+    // 'X-CSRF-TOKEN': window.App.csrfToken,
+    'X-Requested-With':'XMLHttpRequest',
+};
 
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
@@ -43,14 +48,9 @@ if (token) {
  * for events that are broadcast by Laravel. Echo and event broadcasting
  * allows your team to easily build robust real-time web applications.
  */
+window.Vue = require('vue');
 
-// import Echo from 'laravel-echo'
-
-// window.Pusher = require('pusher-js');
-
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     encrypted: true
-// });
+window.events=new Vue();
+window.flash=function (message) {
+  window.events.$emit('flash',message);
+};

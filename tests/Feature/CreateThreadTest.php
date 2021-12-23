@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Activity;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
@@ -73,11 +74,59 @@ class CreateThreadTest extends TestCase
        $this->publishThread(['channel_id'=>999])
             ->assertSessionHasErrors('channel_id');
     }
+    /** @test*/
+    public function unauthorized_users_may_not_delete_threads()
+    {
 
+        $thread=create('App\Thread');
+        $this->delete($thread->path())->assertRedirect('/login');
+        $this->signIn();
+        $this->delete($thread->path())->assertStatus(403);
+    }
+    /** @test*/
+    public function authorized_users_can_deleted_threads()
+    {
+        $this->signIn();
+        $thread=create('App\Thread',['user_id'=>auth()->id()]);
+        $reply=create('App\Reply',['thread_id'=> $thread->id]);
+        $response=$this->json('DELETE',$thread->path());
+        $response->assertStatus(204);
+
+        $this->assertDatabaseMissing('threads',['id'=> $thread->id]);
+        $this->assertDatabaseMissing('replies',['id'=> $reply->id]);
+        $this->assertEquals(0,Activity::count());
+        
+    }
+    
     public function publishThread($overrides = [])
     {
         $this->withExceptionHandling()->signIn();
         $thread=make('App\Thread',$overrides);
         return $this->post('/threads',$thread->toArray());
     }
+/** @test */
+    public function a_thread_can_be_subscribed_to(){
+        // Given we have a thread 
+
+        $thread=create('App\Thread');
+
+        //And an authenticated user
+        // $this->signIn();
+        //When the user subscribes to the thread
+        $thread->subscribe($userId=1);
+        //The we should be able to fresh all threads that the user has subscribed to.
+        $this->assertEquals(1,$thread->subscription()->where('user_id',$userId)->count());
+
+    }
+
+    /** @test */
+    public function a_thread_can_be_unsubscribed_to ()
+    {
+        $thread=create('App\Thread');
+
+        $thread->unsubscribe($userId=1);
+
+        $this->assertCount(0,$thread->subscription);
+    }
+    
 }

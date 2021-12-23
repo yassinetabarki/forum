@@ -9,12 +9,20 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <script>
+        window.App ={!! json_encode([
+            'csrfToken'=> csrf_token(),
+            'signedIn' => Auth::check(),
+            'user'=> Auth::user()
+        ])!!};
+    </script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+{{--    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">--}}
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+
     <style>
         body{
             padding-bottom: 100px;
@@ -25,90 +33,18 @@
         .flex{
             flex:1;
         }
+        .mr-1{
+            margin-right: 1em;
+        }
+        [v-cloak] {display: none;}
     </style>
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                            data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Browse <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                    <li><a href="/threads/"a> All Threads</a></li>
-                                @if(auth()->check())
-                                    <li><a href="/threads?by={{auth()->user()->name}}">My Threads</a></li>
-                                @endif
-                                <li>
-                                    <a href="/threads?popular=1"> Populars</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li><a href="/threads/create">New Thread</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Channels <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                @foreach($channels as $channel)
-                                    <li><a href="/threads/{{$channel->slug}}" a>{{$channel->name}}</a></li>
-                                @endforeach
-                            </ul>
-                        </li>
-
-                    </ul>
-                    </ul>
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="navbar-header">
-                                <a id="navbar" class="nav-link " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-                                <li>    <a href="{{ route('logout') }}"
-                                           onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">Logout
-                                        </a>
-                                </li>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
+        @include('layouts.nav')
         <main class="py-4">
             @yield('content')
+            <flash message="{{session('flash')}}"></flash>
         </main>
     </div>
 </body>

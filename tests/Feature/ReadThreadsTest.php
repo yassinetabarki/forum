@@ -45,16 +45,6 @@ class ReadThreadsTest extends TestCase
     /**
      * @test
      */
-    public function a_user_can_see_replys_for_thread()
-    {
-        $reply=factory('App\Reply')->create(['thread_id' => $this->thread->id]);
-
-        $this->get($this->thread->path())
-             ->assertSee($reply->body);
-    }
-    /**
-     * @test
-     */
     public function a_user_see_threads_according_to_tag()
     {
         $channel=create('App\Channel');
@@ -81,7 +71,9 @@ class ReadThreadsTest extends TestCase
              ->assertSee($yassineThread->title)
              ->assertDontSee($notYassineThread->title);
     }
-    /** @test*/
+    /** 
+     * @test
+     * */
     public function a_user_can_filter_threads_by_popularity()
     {
         $threadwithTowReplies=create('App\Thread');
@@ -96,4 +88,34 @@ class ReadThreadsTest extends TestCase
 
         $this->assertEquals([3,2,0],array_column($response,'replies_count'));
     }
+
+       /** @test  */
+       public function a_user_can_filter_threads_by_answere(){
+
+        $thread=create('App\Thread');
+        
+        create('App\Reply',['thread_id' => $thread->id]);
+
+        $response=$this->getJson('threads?unanswered=1')->json();
+
+        $this->assertCount(1,$response);
+
+    }
+
+    /** 
+     * @test
+     */
+    public function a_user_can_request_all_replies_for_a_given_thread(){
+
+        $thread=create('App\Thread');
+
+        create('App\Reply', ['thread_id' => $thread->id] ,2);
+
+        $response= $this->getJson($thread->path() . '/replies')->json();
+
+        $this->assertCount(2,$response['data']);
+        $this->assertEquals(2,$response['total']);
+    }
+
+ 
 }

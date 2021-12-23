@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5576a731-05fa-486e-9756-cb6f1c35f570" name="Default" comment="" />
+    <list default="true" id="5576a731-05fa-486e-9756-cb6f1c35f570" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/laravel-plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ThreadsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ThreadsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Reply.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Reply.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Thread.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Thread.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/threads/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/threads/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/threads/reply.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/threads/reply.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/threads/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/threads/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Feature/CreateThreadTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/CreateThreadTest.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,11 +36,19 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="blade" />
+        <option value="Vue Single File Component" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="C:\xampp\htdocs\form\.idea" />
+      </set>
+    </option>
   </component>
   <component name="JsbtTreeLayoutManager">
     <layout place="tools.popupnpm">
@@ -37,6 +63,7 @@
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
+  <component name="PhpDebugGeneral" zd_debug_can_accept_external_connections="false" zd_debug_port="10138" />
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/symfony/event-dispatcher-contracts" />
@@ -141,13 +168,19 @@
   <component name="ProjectId" id="1SEfDZ3DfQRs7I3cA6zfgD61V4A" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../acellemail" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
-    <property name="settings.editor.selected.configurable" value="reference.idesettings.emmet" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.debug" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\form\resources\views\profile\activities" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -161,7 +194,11 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="PHPUnit.CreateThreadTest.a_thread_is_required_a_valid_channel">
+  <component name="RunManager" selected="PHPUnit.ActivityTest.it_fetch_a_feed_if_any_user">
+    <configuration name="ActivityTest.it_fetch_a_feed_if_any_user" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Unit\ActivityTest" file="$PROJECT_DIR$/tests/Unit/ActivityTest.php" method="it_fetch_a_feed_if_any_user" scope="Method" />
+      <method v="2" />
+    </configuration>
     <configuration name="CreateThreadTest.a_thread_is_required_a_valid_channel" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="Tests\Feature\CreateThreadTest" file="$PROJECT_DIR$/tests/Feature/CreateThreadTest.php" method="a_thread_is_required_a_valid_channel" scope="Method" use_alternative_configuration_file="true" />
       <method v="2" />
@@ -183,9 +220,11 @@
       <item itemvalue="PHPUnit.PartipateInForum.an_authenticated_user_may_paticiptate_in_forum_thread" />
       <item itemvalue="PHPUnit.PartipateInForumTest.an_authenticated_user_may_paticiptate_in_forum_thread" />
       <item itemvalue="PHPUnit.CreateThreadTest.a_thread_is_required_a_valid_channel" />
+      <item itemvalue="PHPUnit.ActivityTest.it_fetch_a_feed_if_any_user" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="PHPUnit.ActivityTest.it_fetch_a_feed_if_any_user" />
         <item itemvalue="PHPUnit.CreateThreadTest.a_thread_is_required_a_valid_channel" />
         <item itemvalue="PHPUnit.PartipateInForumTest.an_authenticated_user_may_paticiptate_in_forum_thread" />
         <item itemvalue="PHPUnit.PartipateInForum.an_authenticated_user_may_paticiptate_in_forum_thread" />
@@ -229,7 +268,76 @@
       <workItem from="1572107835019" duration="8467000" />
       <workItem from="1572173742477" duration="5746000" />
       <workItem from="1572194124007" duration="2892000" />
-      <workItem from="1572537649456" duration="260000" />
+      <workItem from="1572537649456" duration="575000" />
+      <workItem from="1575226236523" duration="896000" />
+      <workItem from="1579536715603" duration="1834000" />
+      <workItem from="1579538581406" duration="764000" />
+      <workItem from="1579543057498" duration="82000" />
+      <workItem from="1579697376676" duration="625000" />
+      <workItem from="1579708176337" duration="148000" />
+      <workItem from="1579718467926" duration="2806000" />
+      <workItem from="1579722619929" duration="4506000" />
+      <workItem from="1579778712814" duration="6299000" />
+      <workItem from="1580403368613" duration="6576000" />
+      <workItem from="1580486259322" duration="8640000" />
+      <workItem from="1580551295090" duration="8884000" />
+      <workItem from="1580568457739" duration="5921000" />
+      <workItem from="1580840423708" duration="181000" />
+      <workItem from="1581016129233" duration="210000" />
+      <workItem from="1581016935754" duration="1360000" />
+      <workItem from="1581110092381" duration="732000" />
+      <workItem from="1581182358921" duration="1071000" />
+      <workItem from="1581246331137" duration="2458000" />
+      <workItem from="1581322820776" duration="607000" />
+      <workItem from="1581523681193" duration="599000" />
+      <workItem from="1581525038431" duration="123000" />
+      <workItem from="1581529699619" duration="1255000" />
+      <workItem from="1581863198116" duration="694000" />
+      <workItem from="1582044172081" duration="3262000" />
+      <workItem from="1582307609367" duration="1971000" />
+      <workItem from="1593993010305" duration="351000" />
+      <workItem from="1596565784258" duration="116000" />
+      <workItem from="1597399944902" duration="29000" />
+      <workItem from="1597658597471" duration="5022000" />
+      <workItem from="1597683399828" duration="5806000" />
+      <workItem from="1597738895912" duration="4457000" />
+      <workItem from="1597778180318" duration="3094000" />
+      <workItem from="1597836139461" duration="3049000" />
+      <workItem from="1598346677963" duration="979000" />
+      <workItem from="1599932292456" duration="2749000" />
+      <workItem from="1600267906617" duration="4146000" />
+      <workItem from="1600347828025" duration="6496000" />
+      <workItem from="1600464498684" duration="2180000" />
+      <workItem from="1600517199110" duration="1610000" />
+      <workItem from="1600533887509" duration="5221000" />
+      <workItem from="1600549941831" duration="6733000" />
+      <workItem from="1600682597956" duration="3067000" />
+      <workItem from="1600943807784" duration="598000" />
+      <workItem from="1600951646518" duration="8033000" />
+      <workItem from="1601995688066" duration="325000" />
+      <workItem from="1601996035938" duration="679000" />
+      <workItem from="1601996737893" duration="2430000" />
+      <workItem from="1602068567936" duration="9873000" />
+      <workItem from="1606406101012" duration="5000" />
+      <workItem from="1606408716532" duration="8000" />
+      <workItem from="1606408926111" duration="11000" />
+      <workItem from="1606410352511" duration="429000" />
+      <workItem from="1607431566699" duration="1848000" />
+      <workItem from="1607536367688" duration="40000" />
+      <workItem from="1614020773862" duration="1099000" />
+      <workItem from="1614102671970" duration="4219000" />
+      <workItem from="1614153960714" duration="69000" />
+      <workItem from="1614156921034" duration="4083000" />
+      <workItem from="1614281036523" duration="622000" />
+      <workItem from="1614292101421" duration="49000" />
+      <workItem from="1614293124067" duration="2216000" />
+      <workItem from="1614329062134" duration="85000" />
+      <workItem from="1614351024991" duration="1556000" />
+      <workItem from="1614368514829" duration="39000" />
+      <workItem from="1614592954848" duration="4541000" />
+      <workItem from="1614675984068" duration="58000" />
+      <workItem from="1614937244101" duration="1589000" />
+      <workItem from="1615140665459" duration="829000" />
     </task>
     <servers />
   </component>
@@ -250,7 +358,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

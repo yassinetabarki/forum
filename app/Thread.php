@@ -3,19 +3,33 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use function foo\func;
 
 class Thread extends Model
 {
-protected $guarded = [];
+    use RecordActivity;
 
+    protected $guarded = [];
+    protected $with=['creator','channel'];// to always include the creator in the query and you can't disable it
 
     protected static function boot()
     {
         parent::boot();
-        static::addGlobalScope('replyCount',function ($builder){
-            $builder->withCount('replies');
+        // static::addGlobalScope('replyCount',function ($builder){
+        //     $builder->withCount('replies');
+        // });
+        /** to eager load it*/
+//        static::addGlobalScope('creator',function ($builder){
+//            $builder->withCount('creator');
+//        });
+        static::deleting(function($thread){
+//            $thread->replies->each->delete(); //higher order messaging for laravel collection
+           $thread->replies->each(function ($reply){
+               $reply->delete();
+            });
         });
     }
+
 
     public function path(){
 
@@ -34,7 +48,7 @@ protected $guarded = [];
 
     public function addReply($reply)
     {
-         $this->replies()->create($reply);
+         return $this->replies()->create($reply);
     }
 
 
@@ -47,4 +61,27 @@ protected $guarded = [];
     {
         return $filters->apply($query);
     }
+
+    public function subscribe($userId = null)
+    {
+        $this->subscription()->create([
+            'user_id'=> $userId ?: auth()->id()
+        ]);
+    }
+    
+
+    
+    public function unsubscribe($userId = null)
+    {
+        $this->subscription()
+        ->where('user_id', $userId ?: auth()->id())
+        ->delete();
+    }
+
+    public function subscription()
+
+    {
+        return $this->hasMany(ThreadSubscription::class);
+    }
+    
 }

@@ -25,4 +25,11 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function show($id)
+    {
+        if(auth()->user()->id==$id){
+            return view('profile.show');
+        }
+    }
 }

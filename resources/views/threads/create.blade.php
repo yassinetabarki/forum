@@ -10,7 +10,7 @@
                         <form method="POST" action="/threads">
                             @csrf
                             <div class="form-group">
-                                <lable for="channel_id"> choose a channel</lable>
+                                <label for="channel_id"> choose a channel</label>
                                 <select class="form-control" name="channel_id" id="channel_id" required>
                                     <option value="">Choose one..</option>
                                     @foreach($channels as $channel)
