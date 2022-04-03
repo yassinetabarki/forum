@@ -2,14 +2,13 @@
 
 namespace Tests\Unit;
 
+use App\Notifications\ThreadWasUpdated;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-
-
-
+use Illuminate\Support\Facades\Notification;
 
 class ThreadTest extends TestCase
 {
@@ -34,6 +33,22 @@ class ThreadTest extends TestCase
     */
     public function a_thread_has_owner(){
         $this->assertInstanceOf('App\User',$this->thread->creator);
+    }
+
+    /** @test */
+    public function a_thread_notifies_all_registered_subscribers_when_a_reply_is_added (){
+        
+        Notification::fake();
+
+        $this->signIn()
+        ->thread
+        ->subscribe()
+        ->addReply([
+            'body'=>'foobar',
+            'user_id'=> 99
+        ]);
+
+        Notification::assertSentTo(auth()->user(),ThreadWasUpdated::class);
     }
 
     /**
