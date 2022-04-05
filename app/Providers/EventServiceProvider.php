@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Events\ThreadHasNewReply;
 use App\Listeners\NotifyThreadSubscribers;
+use App\Observers\ThreadObserver;
+use App\Thread;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -35,6 +37,6 @@ class EventServiceProvider extends ServiceProvider
     {
         parent::boot();
 
-        //
+        // Thread::observe(ThreadObserver::class);
     }
 }

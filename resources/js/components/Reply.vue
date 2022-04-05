@@ -71,6 +71,9 @@
             update(){
                 axios.patch('/replies/'+this.data.id,{
                     'body':this.body
+                })
+                .catch(error => {
+                    flash(error.response.data['info'],'danger');
                 });
                 this.editing=false;
                 flash('update');

@@ -115,6 +115,7 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
+    // 'spamFree' => 'Spam detected',
 
     /*
     |--------------------------------------------------------------------------
@@ -128,8 +129,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'SpamFree' => [
+            'spamFree' => 'custom-message',
         ],
     ],
 

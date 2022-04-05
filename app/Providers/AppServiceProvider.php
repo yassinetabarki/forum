@@ -35,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('channels', $channel);
         });
 //        View::share('channels', Channel::all());
+        \Validator::extend('spamFree','App\Rules\spamFree@passes');
 
     }
 }

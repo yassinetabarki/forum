@@ -39,6 +39,9 @@ export default {
         addReply(){
 
            axios.post( location.pathname +'/replies' ,{ body: this.body })
+           .catch(error => {
+               flash(error.response.data['info'],'danger');
+           })
            .then(({data}) => {
                this.body='';
 
