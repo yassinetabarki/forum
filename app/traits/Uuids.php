@@ -20,6 +20,9 @@ trait Uuids {
         $model->setIncrementing(false);
 
         $model->setAttribute($model->getKeyName(), Uuid::uuid4());
+        
+        
+        $this->foo();
 
     });
 }
