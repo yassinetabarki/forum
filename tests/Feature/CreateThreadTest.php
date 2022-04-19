@@ -58,6 +58,7 @@ class CreateThreadTest extends TestCase
     public function a_thread_is_required_a_body()
     {
         $this->publishThread(['body'=>null])
+        
             ->assertSessionHasErrors('body');
     }
 

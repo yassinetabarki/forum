@@ -58,6 +58,7 @@
                         </li>
                     @endif
                 @else
+                <user-notifcations> </user-notifcations>
                     <li class="dropdown">
                         <a id="navbar" class="nav-link " href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>

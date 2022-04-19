@@ -7,6 +7,7 @@ use App\Filters\ThreadFilters;
 use App\Inspections\Spam;
 use App\Thread;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -87,7 +88,10 @@ class ThreadsController extends Controller
      */
     public function show($channel,Thread $thread)
     {
-            
+        $key = sprintf("users.%s.visits.%s" ,auth()->id(),$thread->id);
+
+        cache()->forever($key,Carbon::now());
+
         return view('threads.show',compact('thread'));
     }
 

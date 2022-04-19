@@ -53,7 +53,7 @@ class PartipateInForumTest extends TestCase
 
         $reply = make('App\Reply', ['body' => null]);
 
-        $this->post($thread->path() . '/replies', $reply->toArray())
+        $this->json("post",$thread->path() . '/replies', $reply->toArray())
             ->assertStatus(422);
     }   
     /** @test*/
@@ -111,14 +111,15 @@ class PartipateInForumTest extends TestCase
 
        
 
-        $this->post($thread->path() . '/replies', $reply->toArray())
+        $this->json('post',$thread->path() . '/replies', $reply->toArray())
         ->assertStatus(422);
 
     }
 
     /** @test */
     public function users_may_only_reply_a_maximum_of_once_pre_minute ()
-    {
+    {   
+        $this->withExceptionHandling();
         $this->signIn();
 
         $thread = create('App\Thread');
@@ -130,6 +131,6 @@ class PartipateInForumTest extends TestCase
         $this->post($thread->path() . '/replies', $reply->toArray())
         ->assertStatus(201); 
         $this->post($thread->path() . '/replies', $reply->toArray())
-        ->assertStatus(422);
+        ->assertStatus(429);
     }
 }

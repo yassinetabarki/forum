@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreatePostForm;
 use App\Reply;
 use App\Inspections\Spam;
+use App\Notifications\YouWereMentioned;
 use App\Thread;
+use App\User;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,26 +37,35 @@ class ReplysController extends Controller
      * @param  Thread $thread
      * @return void
      */
-    public function store($channelId,Thread $thread)
+    public function store($channelId,Thread $thread,CreatePostForm $form)
     {
-        try {
-            if(Gate::denies('create',new Reply)){
-                return response([
-                    "info" => 'You are posting too many times',
-                ],422);    
-            }
+        
+            // if(Gate::denies('create',new Reply)){
+            //     return response([
+            //         "info" => 'You are posting too many times',
+            //     ],422);    
+            // }
             // $this->authorize('create',new Reply);
-            request()->validate(['body' => 'required|spamFree']);
-            $reply=$thread->addReply([
+            // request()->validate(['body' => 'required|spamFree']);
+
+            // Note: that if you whant more refactor you can do 
+            // return $form->persist($thread);   
+            // 
+            $reply= $thread->addReply([
              'body'=> request('body'),
              'user_id'=> auth()->user()->id,
-        ]);
-        }catch(\Exception $e) {
-            return response([
+            ]);
+
+            // preg_match_all('/\@([^\s\.]+)/',$reply->body,$matches);
+            // $names=$matches[1];
+            // foreach($names as $name){
+            //     $user = User::where('name',$name)->first();
                 
-                "info" => 'Sorry your response could not be saved at this time .',
-            ],422);
-        }
+            //     if($user){
+            //         $user->notify(new YouWereMentioned($reply));
+            //     }
+            // }
+            
             return $reply->load('owner');
         
     }

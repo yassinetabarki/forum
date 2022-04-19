@@ -29,6 +29,7 @@ return user ? handler(user) :  false;
 Vue.component('flash', require('./components/Flash.vue').default);
 Vue.component('paginator', require('./components/paginator.vue').default);
 Vue.component('thread-view', require('./page/Thread.vue').default);
+Vue.component('user-notifcations', require('./components/UserNotifications.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

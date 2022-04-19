@@ -4,16 +4,16 @@ namespace App;
 
 use App\Events\ThreadHasNewReply;
 use App\Notifications\ThreadWasUpdated;
+use App\traits\Uuids;
 use Illuminate\Database\Eloquent\Model;
-use function foo\func;
 
 class Thread extends Model
 {
-    use RecordActivity;
+    use RecordActivity ;
 
     protected $guarded = [];
     protected $with=['creator','channel'];// to always include the creator in the query and you can't disable it
-
+   
     protected $appends = ['isSubscribedTo'];
     
     protected static function boot()
@@ -109,6 +109,13 @@ class Thread extends Model
              $this->subscriptions
              ->where('user_id','!=',$reply->user_id)
              ->each->notify($reply); 
+    }
+
+    public function hasUpdatesFor()
+    {
+        $key = sprintf("users.%s.visits.%s" ,auth()->id(),$this->id);
+
+        return $this->updated_at > cache($key);
     }
     
 }
